@@ -1,400 +1,86 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Louis Fernando Perangin Angin — Portofolio</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --bg-deep:#0a0e16;
-    --bg-panel:#10151f;
-    --bg-panel-2:#141a26;
-    --amber:#ffb454;
-    --amber-dim:#c98d3f;
-    --cyan:#5eead4;
-    --text-primary:#e6edf3;
-    --text-muted:#7d8998;
-    --border:rgba(255,255,255,0.08);
-    --border-strong:rgba(255,255,255,0.16);
-  }
-  *{box-sizing:border-box;}
-  html{scroll-behavior:smooth;}
-  body{
-    margin:0;
-    background:var(--bg-deep);
-    color:var(--text-primary);
-    font-family:'IBM Plex Sans',sans-serif;
-    line-height:1.6;
-    overflow-x:hidden;
-  }
-  .mono{font-family:'JetBrains Mono',monospace;}
-
-  /* grid background texture */
-  .grid-bg{
-    position:fixed; inset:0; z-index:0; pointer-events:none;
-    background-image:
-      linear-gradient(rgba(94,234,212,0.02) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(94,234,212,0.02) 1px, transparent 1px);
-    background-size:48px 48px;
-    -webkit-mask-image:radial-gradient(ellipse 80% 60% at 50% 0%, black, transparent 75%);
-            mask-image:radial-gradient(ellipse 80% 60% at 50% 0%, black, transparent 75%);
-  }
-  .vignette{
-    position:fixed; inset:0; z-index:0; pointer-events:none;
-    background:radial-gradient(ellipse 90% 70% at 50% 0%, transparent 40%, rgba(0,0,0,0.55) 100%);
-  }
-
-  .wrap{max-width:1100px; margin:0 auto; padding:0 32px; position:relative; z-index:1;}
-
-  /* navbar */
-  nav{
-    position:sticky; top:0; z-index:50;
-    backdrop-filter:blur(10px);
-    background:rgba(10,14,22,0.72);
-    border-bottom:1px solid var(--border);
-  }
-  nav .wrap{display:flex; align-items:center; justify-content:space-between; height:64px;}
-  .logo{font-size:15px; letter-spacing:0.02em;}
-  .logo span{color:var(--cyan);}
-  .navlinks{display:flex; gap:28px; list-style:none; margin:0; padding:0;}
-  .navlinks a{color:var(--text-muted); text-decoration:none; font-size:13px; letter-spacing:0.04em; text-transform:lowercase; transition:color .2s;}
-  .navlinks a:hover{color:var(--cyan);}
-  .navlinks a::before{content:'/'; color:var(--amber-dim); margin-right:4px;}
-
-  /* hero section */
-  .hero{
-    display:grid; grid-template-columns:1.1fr 0.9fr; gap:40px; align-items:center;
-    min-height:88vh; padding-top:40px;
-  }
-  .term-line{font-size:13px; color:var(--cyan); margin-bottom:6px;}
-  .term-line .prompt{color:var(--amber-dim);}
-  .cursor{display:inline-block; width:8px; height:16px; background:var(--cyan); margin-left:4px; vertical-align:-2px; animation:blink 1s step-end infinite;}
-  @keyframes blink{50%{opacity:0;}}
-  h1.headline{
-    font-size:40px; font-weight:500; line-height:1.2; margin:18px 0 16px;
-    letter-spacing:-0.01em;
-  }
-  h1.headline .hl{color:var(--cyan);}
-  .sub{color:var(--text-muted); font-size:15px; max-width:520px; margin-bottom:28px;}
-  .status-line{
-    display:inline-flex; align-items:center; gap:8px; font-size:12px; color:var(--text-muted);
-    border:1px solid var(--border); border-radius:20px; padding:6px 14px; margin-bottom:28px;
-  }
-  .dot{width:7px; height:7px; border-radius:50%; background:var(--cyan); box-shadow:0 0 8px var(--cyan);}
-  .cta-row{display:flex; gap:14px; flex-wrap:wrap;}
-  .btn{
-    font-family:'JetBrains Mono',monospace; font-size:13px; padding:13px 22px; border-radius:4px;
-    text-decoration:none; letter-spacing:0.02em; transition:all .2s; display:inline-block;
-  }
-  .btn-primary{background:var(--cyan); color:#0a0e16; font-weight:500;}
-  .btn-primary:hover{background:#a7f3d0;}
-  .btn-secondary{border:1px solid var(--border-strong); color:var(--text-primary);}
-  .btn-secondary:hover{border-color:var(--amber); color:var(--amber);}
-
-  /* Hero Visual Layout & Profile Photo Styling */
-  .hero-visual{
-    position:relative; 
-    height:400px;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
-  }
-  .profile-img {
-    width: 200px;
-    height: 200px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 2px solid var(--cyan);
-    box-shadow: 0 0 20px rgba(94, 234, 212, 0.3);
-    z-index: 2;
-    margin-bottom: -40px;
-  }
-  #heroCanvas{
-    width:100%; 
-    height:100%; 
-    display:block;
-    z-index: 1;
-  }
-
-  /* section formatting */
-  section{padding:80px 0;}
-  .eyebrow{font-size:12px; color:var(--amber); letter-spacing:0.12em; text-transform:uppercase; margin-bottom:10px;}
-  h2.sec-title{font-size:28px; font-weight:500; margin:0 0 36px;}
-
-  /* tentang */
-  .about-grid{display:grid; grid-template-columns:1.3fr 1fr; gap:48px;}
-  .about-grid p{color:var(--text-muted); font-size:15px; margin:0 0 16px;}
-  .stats{display:flex; flex-direction:column; gap:22px;}
-  .stat{border-left:2px solid var(--cyan); padding-left:16px;}
-  .stat .num{font-family:'JetBrains Mono',monospace; font-size:28px; color:var(--text-primary);}
-  .stat .lbl{font-size:13px; color:var(--text-muted);}
-
-  /* keahlian */
-  .skills-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:18px;}
-  .tilt-card{
-    background:var(--bg-panel); border:1px solid var(--border); border-radius:8px;
-    padding:26px 22px; transition:border-color .2s, box-shadow .2s;
-    transform-style:preserve-3d; will-change:transform;
-  }
-  .tilt-card:hover{border-color:var(--border-strong); box-shadow:0 20px 40px -20px rgba(0,0,0,0.6);}
-  .tilt-icon{font-family:'JetBrains Mono',monospace; color:var(--amber); font-size:20px; margin-bottom:14px;}
-  .tilt-card h3{font-size:15px; font-weight:500; margin:0 0 8px;}
-  .tilt-card p{font-size:13px; color:var(--text-muted); margin:0;}
-
-  /* portofolio / proyek */
-  .case-list{display:flex; flex-direction:column; gap:1px; background:var(--border); border:1px solid var(--border); border-radius:8px; overflow:hidden;}
-  .case-item{background:var(--bg-panel); padding:26px 28px; display:grid; grid-template-columns:auto 1fr auto; gap:22px; align-items:center;}
-  .sev{font-family:'JetBrains Mono',monospace; font-size:11px; padding:4px 10px; border-radius:3px; letter-spacing:0.05em; white-space:nowrap; height:fit-content;}
-  .sev-fullstack{background:rgba(94,234,212,0.1); color:var(--cyan); border:1px solid rgba(94,234,212,0.3);}
-  .sev-android{background:rgba(255,180,84,0.1); color:var(--amber); border:1px solid rgba(255,180,84,0.3);}
-  .sev-network{background:rgba(230,237,243,0.05); color:var(--text-primary); border:1px solid rgba(230,237,243,0.1);}
-  .case-item h3{font-size:16px; font-weight:500; margin:0 0 6px;}
-  .case-item p{font-size:13px; color:var(--text-muted); margin:0;}
-  .case-arrow{color:var(--text-muted); font-family:'JetBrains Mono',monospace;}
-
-  /* lini masa pengalaman */
-  .timeline{position:relative; padding-left:32px;}
-  .timeline::before{content:''; position:absolute; left:5px; top:6px; bottom:6px; width:1px; background:var(--border-strong);}
-  .tl-item{position:relative; padding-bottom:38px;}
-  .tl-item:last-child{padding-bottom:0;}
-  .tl-item::before{content:''; position:absolute; left:-32px; top:4px; width:11px; height:11px; border-radius:50%; background:var(--bg-deep); border:2px solid var(--cyan);}
-  .tl-date{font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--cyan); margin-bottom:4px;}
-  .tl-item h3{font-size:16px; margin:0 0 4px; font-weight:500;}
-  .tl-item p{font-size:13px; color:var(--text-muted); margin:0;}
-
-  /* kontak */
-  .contact-box{
-    background:var(--bg-panel); border:1px solid var(--border); border-radius:10px;
-    padding:48px; text-align:center;
-  }
-  .contact-box h2{font-size:26px; margin:0 0 12px; font-weight:500;}
-  .contact-box p{color:var(--text-muted); margin:0 0 28px;}
-  .contact-links{display:flex; gap:18px; justify-content:center; flex-wrap:wrap;}
-  .contact-links a{color:var(--text-primary); text-decoration:none; font-size:13px; font-family:'JetBrains Mono',monospace; border:1px solid var(--border-strong); padding:10px 18px; border-radius:4px; transition:all .2s;}
-  .contact-links a:hover{border-color:var(--cyan); color:var(--cyan);}
-
-  footer{padding:32px 0; text-align:center; color:var(--text-muted); font-size:12px; border-top:1px solid var(--border);}
-
-  @media(max-width:860px){
-    .hero{grid-template-columns:1fr;}
-    .hero-visual{height:280px;}
-    .about-grid{grid-template-columns:1fr;}
-    .skills-grid{grid-template-columns:1fr 1fr;}
-    .case-item{grid-template-columns:1fr; text-align:left;}
-    h1.headline{font-size:30px;}
-  }
-  @media(max-width:560px){
-    .navlinks{display:none;}
-    .skills-grid{grid-template-columns:1fr;}
-  }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Louis Fernando | Web & Cyber Security Portfolio</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-<div class="grid-bg"></div>
-<div class="vignette"></div>
+    <header>
+        <div class="container">
+            <!-- Updated Terminal Prompt Style -->
+            <div class="terminal-header">
+                <span class="terminal-prompt">louis portfolio ></span>
+            </div>
+            <h1>Louis Fernando Perangin Angin</h1>
+            <p>Informatics Student @ UPNVJ | Full-Stack Developer & Cyber Security Enthusiast</p>
+            <div class="links">
+                <a href="mailto:2410511003@mahasiswa.upnvj.ac.id">Email</a> | 
+                <a href="https://github.com/Luiz6699" target="_blank">GitHub</a> | 
+                <a href="https://linkedin.com/in/Luiz6699" target="_blank">LinkedIn</a>
+            </div>
+        </div>
+    </header>
 
-<nav>
-  <div class="wrap">
-    <div class="logo mono">louis<span>@</span>dev<span>:~$</span></div>
-    <ul class="navlinks mono">
-      <li><a href="#tentang">tentang</a></li>
-      <li><a href="#keahlian">keahlian</a></li>
-      <li><a href="#proyek">proyek</a></li>
-      <li><a href="#organisasi">organisasi</a></li>
-      <li><a href="#kontak">kontak</a></li>
-    </ul>
-  </div>
-</nav>
+    <main class="container">
+        <!-- 01 . PROFILE SECTION -->
+        <section id="about">
+            <h2>01 · PROFILE</h2>
+            <h3>About Me</h3>
+            <p>I combine digital product development expertise with a foundational understanding of vulnerability assessment. To me, efficient backend performance and robust user data security are two inseparable cornerstones of modern software engineering.</p>
+            <p>Active in the academic environment with a 3.88 GPA, while concurrently leading the multimedia division in the Cyber Security student study group to sharpen both my technical capabilities and leadership skills.</p>
+        </section>
 
-<div class="wrap">
-  <section class="hero">
-    <div>
-      <div class="term-line mono"><span class="prompt">guest@louis</span>:~$ whoami<span class="cursor"></span></div>
-      <div class="term-line mono" style="color:var(--text-muted)">&gt; full_stack_developer · cyber_security_student</div>
-      <h1 class="headline">Membangun sistem digital,<br><span class="hl">memastikan keamanannya sejak awal.</span></h1>
-      <p class="sub">Saya Louis Fernando Perangin Angin — Mahasiswa Informatika di UPNVJ yang berfokus pada pengembangan aplikasi full-stack terintegrasi dengan pemahaman dasar arsitektur keamanan dan pengujian celah sistem.</p>
-      <div class="status-line mono"><span class="dot"></span> status: aktif mengembangkan arsitektur basis data lokal & keamanan web</div>
-      <div class="cta-row">
-        <a href="#proyek" class="btn btn-primary">Lihat proyek</a>
-        <a href="#kontak" class="btn btn-secondary">Hubungi saya</a>
-      </div>
-    </div>
-    <div class="hero-visual">
-      <img src="foto-profile.jpeg" alt="Louis Fernando" class="profile-img">
-      <canvas id="heroCanvas"></canvas>
-    </div>
-  </section>
+        <!-- 02 . PROJECTS SECTION -->
+        <section id="projects">
+            <h2>02 · FEATURED PROJECTS</h2>
+            
+            <div class="project-card">
+                <h3>BudgetBits: Personal Finance Application</h3>
+                <span class="badge">Kotlin</span> <span class="badge">SQLite</span> <span class="badge">Android</span>
+                <p>A data-driven mobile application engineered with an atomic local database architecture to prevent transactional balance mismatch inconsistencies.</p>
+                <ul>
+                    <li>Designed relational schemas and thread-safe CRUD mutations via explicit SQLite transactions.</li>
+                    <li>Authored detailed technical and algorithmic logic documentation for the data pipeline.</li>
+                </ul>
+            </div>
 
-  <section id="tentang">
-    <div class="eyebrow">01 · Profil</div>
-    <h2 class="sec-title">Tentang saya</h2>
-    <div class="about-grid">
-      <div>
-        <p>Saya mengombinasikan keahlian membangun produk digital dengan pemahaman dasar mengenai manajemen celah keamanan (vulnerability assessment). Bagi saya, performa kode backend yang efisien dan keamanan data pengguna adalah dua fondasi utama yang tidak bisa dipisahkan dalam pengembangan perangkat lunak modern.</p>
-        <p>Aktif dalam lingkungan akademik dengan IPK 3.88 serta memimpin divisi multimedia pada kelompok studi mahasiswa bidang Cyber Security guna mengasah kapabilitas teknis dan kepemimpinan.</p>
-      </div>
-      <div class="stats">
-        <div class="stat"><div class="num mono">3.88</div><div class="lbl">IPK Akademik (S1 Informatika)</div></div>
-        <div class="stat"><div class="num mono">Full-Stack</div><div class="lbl">Kombinasi Kapabilitas Dev & Ops</div></div>
-      </div>
-    </div>
-  </section>
+            <div class="project-card">
+                <h3>Campus Mental Health Web Portal</h3>
+                <span class="badge">Python</span> <span class="badge">MySQL</span> <span class="badge">Ngrok</span>
+                <p>A full-stack application engineered to support student well-being, integrated with dynamic databases and subjected to extensive security auditing.</p>
+                <ul>
+                    <li>Managed full backend logic implementation and secure integration via localized tunnels.</li>
+                    <li>Conducted source-code security analysis to secure application data vectors from threat actions.</li>
+                </ul>
+            </div>
+        </section>
 
-  <section id="keahlian">
-    <div class="eyebrow">02 · Kapabilitas</div>
-    <h2 class="sec-title">Keahlian & Perangkat</h2>
-    <div class="skills-grid">
-      <div class="tilt-card"><div class="tilt-icon mono">&lt;/&gt;</div><h3>Full-Stack Development</h3><p>Membangun frontend dan backend aplikasi menggunakan Python, JavaScript, C++, MySQL, dan JSON.</p></div>
-      <div class="tilt-card"><div class="tilt-icon mono">📦</div><h3>Mobile Development</h3><p>Pengembangan aplikasi Android dengan Kotlin, arsitektur basis data lokal SQLite, dan Material Design 3.</p></div>
-      <div class="tilt-card"><div class="tilt-icon mono">🔒</div><h3>Cyber Security Fundamentals</h3><p>Audit keamanan kode, pemahaman kriptografi dasar, ethical hacking entry-level, dan lingkungan Kali Linux.</p></div>
-      <div class="tilt-card"><div class="tilt-icon mono">🌐</div><h3>Networking Labs</h3><p>Simulasi topologi jaringan, routing, pengelolaan DHCP/DNS menggunakan Cisco Packet Tracer dan Wireshark.</p></div>
-      <div class="tilt-card"><div class="tilt-icon mono">⚙</div><h3>System Administration</h3><p>Manajemen env lokal, Ngrok tunneling, integrasi komponen broadcast sistem, dan pengelolaan data persisten.</p></div>
-      <div class="tilt-card"><div class="tilt-icon mono">🎬</div><h3>Multimedia & Creative</h3><p>Produksi videography, editing konten visual digital, dan koordinasi manajemen aset publikasi komunitas.</p></div>
-    </div>
-  </section>
+        <!-- 03 . SKILLS SECTION -->
+        <section id="skills">
+            <h2>03 · CORE SKILLS MATRIX</h2>
+            <table>
+                <tr>
+                    <th>Category</th>
+                    <th>Technical Expertise & Tools</th>
+                </tr>
+                <tr>
+                    <td><b>Cyber Security & Networks</b></td>
+                    <td>Vulnerability Assessment, Ethical Hacking basics, Kali Linux, Wireshark, Cisco Packet Tracer</td>
+                </tr>
+                <tr>
+                    <td><b>Development & Databases</b></td>
+                    <td>Full-Stack Web Dev, Python, C++, JavaScript, MySQL, SQLite, JSON</td>
+                </tr>
+            </table>
+        </section>
+    </main>
 
-  <section id="proyek">
-    <div class="eyebrow">03 · Portofolio</div>
-    <h2 class="sec-title">Proyek & Implementasi Sistem</h2>
-    <div class="case-list">
-      <div class="case-item">
-        <span class="sev sev-android mono">Android</span>
-        <div><h3>BudgetBits: Personal Finance Application</h3><p>Membangun aplikasi uang saku harian dengan logika SQLite transactions secara atomik untuk menjamin konsistensi update saldo otomatis tanpa memory overhead.</p></div>
-        <span class="case-arrow">→</span>
-      </div>
-      <div class="case-item">
-        <span class="sev sev-fullstack mono">Full-Stack</span>
-        <div><h3>Campus Mental Health Web Application</h3><p>Mengembangkan platform kesehatan mental mahasiswa secara end-to-end dengan database MySQL, integrasi local tunnel Ngrok, serta analisis audit keamanan source code pasca-pengembangan.</p></div>
-        <span class="case-arrow">→</span>
-      </div>
-      <div class="case-item">
-        <span class="sev sev-network mono">Network</span>
-        <div><h3>Secure Network Simulation & Audit</h3><p>Merancang simulasi topologi jaringan komputer menggunakan Cisco Packet Tracer dan mengevaluasi lalu lintas paket data melalui Wireshark.</p></div>
-        <span class="case-arrow">→</span>
-      </div>
-    </div>
-  </section>
+    <footer>
+        <p>© 2026 Louis Fernando Perangin Angin. Powered by GitHub Pages.</p>
+    </footer>
 
-  <section id="organisasi">
-    <div class="eyebrow">04 · Organisasi & Kepemimpinan</div>
-    <h2 class="sec-title">Riwayat Aktivitas</h2>
-    <div class="timeline">
-      <div class="tl-item"><div class="tl-date mono">2026 — Sekarang</div><h3>Kepala Divisi Multimedia, KSM Cyber Security UPNVJ</h3><p>Memimpin tim dalam produksi konten digital, merancang branding organisasi, dan berkolaborasi lintas divisi demi meningkatkan publikasi komunitas.</p></div>
-      <div class="tl-item"><div class="tl-date mono">2025</div><h3>Project Officer Open Recruitment, KSM Cyber Security UPNVJ</h3><p>Memimpin siklus perekrutan anggota baru dari manajemen linimasa, distribusi logistik, hingga pelaksanaan trial class teknis bagi para calon pendaftar.</p></div>
-      <div class="tl-item"><div class="tl-date mono">2025</div><h3>Staff PSDM, KSM Cyber Security UPNVJ</h3><p>Membantu perancangan program pelatihan internal guna mengembangkan keterampilan teknis dan soft skill anggota.</p></div>
-      <div class="tl-item"><div class="tl-date mono">2024 — 2025</div><h3>Anggota Muda Divisi Videografi, UKM UFO UPNVJ</h3><p>Berkontribusi dalam tim produksi kreatif dokumentasi kegiatan serta liputan media di tingkat universitas.</p></div>
-    </div>
-  </section>
-
-  <section id="kontak">
-    <div class="contact-box">
-      <h2>Mari Berkolaborasi</h2>
-      <p>Terbuka untuk posisi magang di bidang software engineering, full-stack development, atau pengerjaan proyek sistem digital.</p>
-      <div class="contact-links">
-        <a href="mailto:2410511003@mahasiswa.upnvj.ac.id">2410511003@mahasiswa.upnvj.ac.id</a>
-        <a href="https://linkedin.com/in/usernamekamu" target="_blank">linkedin.com/in/usernamekamu</a>
-        <a href="https://github.com/usernamekamu" target="_blank">github.com/usernamekamu</a>
-      </div>
-    </div>
-  </section>
-</div>
-
-<footer>© 2026 Louis Fernando Perangin Angin — Dibangun dengan fokus fungsionalitas dan keamanan.</footer>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-<script>
-  // 3D Matrix Cube Network Object in Hero
-  const canvas = document.getElementById('heroCanvas');
-  const renderer = new THREE.WebGLRenderer({canvas, alpha:true, antialias:true});
-  const scene = new THREE.Scene();
-  const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 100);
-  camera.position.z = 6;
-
-  function resize(){
-    const w = canvas.clientWidth, h = canvas.clientHeight;
-    renderer.setSize(w, h, false);
-    camera.aspect = w/h;
-    camera.updateProjectionMatrix();
-  }
-  window.addEventListener('resize', resize);
-
-  const group = new THREE.Group();
-  scene.add(group);
-
-  const geo = new THREE.BoxGeometry(1.8, 1.8, 1.8, 2, 2, 2);
-  const wireMat = new THREE.MeshBasicMaterial({color:0x5eead4, wireframe:true, transparent:true, opacity:0.6});
-  const coreBox = new THREE.Mesh(geo, wireMat);
-  group.add(coreBox);
-
-  const innerGeo = new THREE.OctahedronGeometry(1, 0);
-  const innerMat = new THREE.MeshBasicMaterial({color:0xffb454, wireframe:true, transparent:true, opacity:0.4});
-  const innerCore = new THREE.Mesh(innerGeo, innerMat);
-  group.add(innerCore);
-
-  const nodes = [];
-  for(let i=0;i<12;i++){
-    const nGeo = new THREE.SphereGeometry(0.04, 8, 8);
-    const nMat = new THREE.MeshBasicMaterial({color: i % 2 === 0 ? 0xffb454 : 0x5eead4});
-    const node = new THREE.Mesh(nGeo, nMat);
-    const radius = 2.2 + Math.random()*0.5;
-    const angle = Math.random()*Math.PI*2;
-    const tilt = Math.random()*Math.PI;
-    node.userData = {radius, angle, tilt, speed: 0.15 + Math.random()*0.2};
-    nodes.push(node);
-    scene.add(node);
-  }
-
-  let mouseX = 0, mouseY = 0;
-  document.addEventListener('mousemove', (e)=>{
-    mouseX = (e.clientX / window.innerWidth - 0.5);
-    mouseY = (e.clientY / window.innerHeight - 0.5);
-  });
-
-  const clock = new THREE.Clock();
-  function animate(){
-    requestAnimationFrame(animate);
-    const t = clock.getElapsedTime();
-    coreBox.rotation.y = t * 0.2;
-    coreBox.rotation.x = t * 0.15;
-    innerCore.rotation.y = -t * 0.3;
-    innerCore.rotation.x = t * 0.1;
-
-    group.rotation.y += (mouseX*0.5 - group.rotation.y)*0.05;
-    group.rotation.x += (-mouseY*0.3 - group.rotation.x)*0.05;
-
-    nodes.forEach(node=>{
-      const d = node.userData;
-      const a = d.angle + t*d.speed;
-      node.position.set(
-        Math.cos(a)*d.radius,
-        Math.sin(a)*d.radius*Math.cos(d.tilt),
-        Math.sin(a)*d.radius*Math.sin(d.tilt)
-      );
-    });
-
-    renderer.render(scene, camera);
-  }
-  resize();
-  animate();
-
-  // 3D tilt interaction on skill cards
-  document.querySelectorAll('.tilt-card').forEach(card=>{
-    card.style.perspective = '600px';
-    card.addEventListener('mousemove', (e)=>{
-      const r = card.getBoundingClientRect();
-      const x = (e.clientX - r.left)/r.width - 0.5;
-      const y = (e.clientY - r.top)/r.height - 0.5;
-      card.style.transform = `rotateY(${x*12}deg) rotateX(${-y*12}deg) translateZ(6px)`;
-    });
-    card.addEventListener('mouseleave', ()=>{
-      card.style.transform = 'rotateY(0) rotateX(0)';
-    });
-  });
-</script>
 </body>
 </html>
