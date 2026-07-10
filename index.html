@@ -1,583 +1,402 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Louis Fernando | Portfolio</title>
-    <style>
-        /* =========================================
-           Premium Dark Terminal Portfolio Styles
-           Tailored for Louis Fernando Perangin Angin
-           ========================================= */
-        :root {
-            --bg-dark: #0a0a0c;
-            --bg-panel: #111114;
-            --text-main: #e0e0e6;
-            --text-mute: #a1a1aa;
-            --accent-primary: #14f195; /* Green Terminal Accent */
-            --border-color: #27272a;
-            --font-mono: 'Fira Code', 'Roboto Mono', 'Courier New', monospace;
-            --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
-            --container-max: 1200px;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Louis Fernando Perangin Angin — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg-deep:#0a0e16;
+    --bg-panel:#10151f;
+    --bg-panel-2:#141a26;
+    --amber:#ffb454;
+    --amber-dim:#c98d3f;
+    --cyan:#5eead4;
+    --text-primary:#e6edf3;
+    --text-muted:#7d8998;
+    --border:rgba(255,255,255,0.08);
+    --border-strong:rgba(255,255,255,0.16);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--bg-deep);
+    color:var(--text-primary);
+    font-family:'IBM Plex Sans',sans-serif;
+    line-height:1.6;
+    overflow-x:hidden;
+  }
+  .mono{font-family:'JetBrains Mono',monospace;}
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  /* grid background texture */
+  .grid-bg{
+    position:fixed; inset:0; z-index:0; pointer-events:none;
+    background-image:
+      linear-gradient(rgba(94,234,212,0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(94,234,212,0.02) 1px, transparent 1px);
+    background-size:48px 48px;
+    -webkit-mask-image:radial-gradient(ellipse 80% 60% at 50% 0%, black, transparent 75%);
+            mask-image:radial-gradient(ellipse 80% 60% at 50% 0%, black, transparent 75%);
+  }
+  .vignette{
+    position:fixed; inset:0; z-index:0; pointer-events:none;
+    background:radial-gradient(ellipse 90% 70% at 50% 0%, transparent 40%, rgba(0,0,0,0.55) 100%);
+  }
 
-        html {
-            scroll-behavior: smooth;
-            background-color: var(--bg-dark);
-        }
+  .wrap{max-width:1100px; margin:0 auto; padding:0 32px; position:relative; z-index:1;}
 
-        body {
-            background-color: var(--bg-dark);
-            color: var(--text-main);
-            font-family: var(--font-sans);
-            line-height: 1.6;
-            overflow-x: hidden;
-            padding-top: 80px;
-        }
+  /* navbar */
+  nav{
+    position:sticky; top:0; z-index:50;
+    backdrop-filter:blur(10px);
+    background:rgba(10,14,22,0.72);
+    border-bottom:1px solid var(--border);
+  }
+  nav .wrap{display:flex; align-items:center; justify-content:space-between; height:64px;}
+  .logo{font-size:15px; letter-spacing:0.02em;}
+  .logo span{color:var(--cyan);}
+  .navlinks{display:flex; gap:28px; list-style:none; margin:0; padding:0;}
+  .navlinks a{color:var(--text-muted); text-decoration:none; font-size:13px; letter-spacing:0.04em; text-transform:lowercase; transition:color .2s;}
+  .navlinks a:hover{color:var(--cyan);}
+  .navlinks a::before{content:'/'; color:var(--amber-dim); margin-right:4px;}
 
-        .container {
-            width: 90%;
-            max-width: var(--container-max);
-            margin: 0 auto;
-            padding: 0 20px;
-        }
+  /* hero section */
+  .hero{
+    display:grid; grid-template-columns:1.1fr 0.9fr; gap:40px; align-items:center;
+    min-height:88vh; padding-top:40px;
+  }
+  .term-line{font-size:13px; color:var(--cyan); margin-bottom:6px;}
+  .term-line .prompt{color:var(--amber-dim);}
+  .cursor{display:inline-block; width:8px; height:16px; background:var(--cyan); margin-left:4px; vertical-align:-2px; animation:blink 1s step-end infinite;}
+  @keyframes blink{50%{opacity:0;}}
+  h1.headline{
+    font-size:40px; font-weight:500; line-height:1.2; margin:18px 0 16px;
+    letter-spacing:-0.01em;
+  }
+  h1.headline .hl{color:var(--cyan);}
+  .sub{color:var(--text-muted); font-size:15px; max-width:520px; margin-bottom:28px;}
+  .status-line{
+    display:inline-flex; align-items:center; gap:8px; font-size:12px; color:var(--text-muted);
+    border:1px solid var(--border); border-radius:20px; padding:6px 14px; margin-bottom:28px;
+  }
+  .dot{width:7px; height:7px; border-radius:50%; background:var(--cyan); box-shadow:0 0 8px var(--cyan);}
+  .cta-row{display:flex; gap:14px; flex-wrap:wrap;}
+  .btn{
+    font-family:'JetBrains Mono',monospace; font-size:13px; padding:13px 22px; border-radius:4px;
+    text-decoration:none; letter-spacing:0.02em; transition:all .2s; display:inline-block;
+  }
+  .btn-primary{background:var(--cyan); color:#0a0e16; font-weight:500;}
+  .btn-primary:hover{background:#a7f3d0;}
+  .btn-secondary{border:1px solid var(--border-strong); color:var(--text-primary);}
+  .btn-secondary:hover{border-color:var(--amber); color:var(--amber);}
 
-        .highlight { color: var(--accent-primary); font-weight: 600; }
-        
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            padding: 12px 28px;
-            border-radius: 6px;
-            font-size: 0.95rem;
-            font-weight: 500;
-            text-decoration: none;
-            transition: all 0.2s ease;
-            cursor: pointer;
-        }
+  /* Hero Visual Layout & Profile Photo Styling */
+  .hero-visual{
+    position:relative; 
+    height:400px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+  }
+  .profile-img {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--cyan);
+    box-shadow: 0 0 20px rgba(94, 234, 212, 0.3);
+    z-index: 2;
+    margin-bottom: -40px;
+  }
+  #heroCanvas{
+    width:100%; 
+    height:100%; 
+    display:block;
+    z-index: 1;
+  }
 
-        .btn-primary {
-            background-color: var(--accent-primary);
-            color: #000;
-            font-weight: bold;
-        }
+  /* section formatting */
+  section{padding:80px 0;}
+  .eyebrow{font-size:12px; color:var(--amber); letter-spacing:0.12em; text-transform:uppercase; margin-bottom:10px;}
+  h2.sec-title{font-size:28px; font-weight:500; margin:0 0 36px;}
 
-        .btn-primary:hover {
-            background-color: #11d986;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 14px rgba(20, 241, 149, 0.3);
-        }
+  /* tentang */
+  .about-grid{display:grid; grid-template-columns:1.3fr 1fr; gap:48px;}
+  .about-grid p{color:var(--text-muted); font-size:15px; margin:0 0 16px;}
+  .stats{display:flex; flex-direction:column; gap:22px;}
+  .stat{border-left:2px solid var(--cyan); padding-left:16px;}
+  .stat .num{font-family:'JetBrains Mono',monospace; font-size:28px; color:var(--text-primary);}
+  .stat .lbl{font-size:13px; color:var(--text-muted);}
 
-        .btn-secondary {
-            background-color: transparent;
-            color: var(--text-main);
-            border: 2px solid var(--border-color);
-        }
+  /* keahlian */
+  .skills-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:18px;}
+  .tilt-card{
+    background:var(--bg-panel); border:1px solid var(--border); border-radius:8px;
+    padding:26px 22px; transition:border-color .2s, box-shadow .2s;
+    transform-style:preserve-3d; will-change:transform;
+  }
+  .tilt-card:hover{border-color:var(--border-strong); box-shadow:0 20px 40px -20px rgba(0,0,0,0.6);}
+  .tilt-icon{font-family:'JetBrains Mono',monospace; color:var(--amber); font-size:20px; margin-bottom:14px;}
+  .tilt-card h3{font-size:15px; font-weight:500; margin:0 0 8px;}
+  .tilt-card p{font-size:13px; color:var(--text-muted); margin:0;}
 
-        .btn-secondary:hover {
-            border-color: var(--text-main);
-            transform: translateY(-2px);
-        }
+  /* portofolio / proyek */
+  .case-list{display:flex; flex-direction:column; gap:1px; background:var(--border); border:1px solid var(--border); border-radius:8px; overflow:hidden;}
+  .case-item{background:var(--bg-panel); padding:26px 28px; display:grid; grid-template-columns:auto 1fr auto; gap:22px; align-items:center;}
+  .sev{font-family:'JetBrains Mono',monospace; font-size:11px; padding:4px 10px; border-radius:3px; letter-spacing:0.05em; white-space:nowrap; height:fit-content;}
+  .sev-fullstack{background:rgba(94,234,212,0.1); color:var(--cyan); border:1px solid rgba(94,234,212,0.3);}
+  .sev-android{background:rgba(255,180,84,0.1); color:var(--amber); border:1px solid rgba(255,180,84,0.3);}
+  .sev-network{background:rgba(230,237,243,0.05); color:var(--text-primary); border:1px solid rgba(230,237,243,0.1);}
+  .case-item h3{font-size:16px; font-weight:500; margin:0 0 6px;}
+  .case-item p{font-size:13px; color:var(--text-muted); margin:0;}
+  .case-arrow{color:var(--text-muted); font-family:'JetBrains Mono',monospace;}
 
-        /* Top Navigation Bar */
-        .navbar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            background-color: rgba(10, 10, 12, 0.9);
-            backdrop-filter: blur(8px);
-            border-bottom: 1px solid var(--border-color);
-            z-index: 1000;
-            padding: 20px 0;
-        }
+  /* lini masa pengalaman */
+  .timeline{position:relative; padding-left:32px;}
+  .timeline::before{content:''; position:absolute; left:5px; top:6px; bottom:6px; width:1px; background:var(--border-strong);}
+  .tl-item{position:relative; padding-bottom:38px;}
+  .tl-item:last-child{padding-bottom:0;}
+  .tl-item::before{content:''; position:absolute; left:-32px; top:4px; width:11px; height:11px; border-radius:50%; background:var(--bg-deep); border:2px solid var(--cyan);}
+  .tl-date{font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--cyan); margin-bottom:4px;}
+  .tl-item h3{font-size:16px; margin:0 0 4px; font-weight:500;}
+  .tl-item p{font-size:13px; color:var(--text-muted); margin:0;}
 
-        .nav-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+  /* kontak */
+  .contact-box{
+    background:var(--bg-panel); border:1px solid var(--border); border-radius:10px;
+    padding:48px; text-align:center;
+  }
+  .contact-box h2{font-size:26px; margin:0 0 12px; font-weight:500;}
+  .contact-box p{color:var(--text-muted); margin:0 0 28px;}
+  .contact-links{display:flex; gap:18px; justify-content:center; flex-wrap:wrap;}
+  .contact-links a{color:var(--text-primary); text-decoration:none; font-size:13px; font-family:'JetBrains Mono',monospace; border:1px solid var(--border-strong); padding:10px 18px; border-radius:4px; transition:all .2s;}
+  .contact-links a:hover{border-color:var(--cyan); color:var(--cyan);}
 
-        .brand .terminal-prompt {
-            font-family: var(--font-mono);
-            color: var(--accent-primary);
-            font-size: 1.1rem;
-            font-weight: 700;
-        }
+  theme-toggle-container{display:none;}
+  footer{padding:32px 0; text-align:center; color:var(--text-muted); font-size:12px; border-top:1px solid var(--border);}
 
-        .nav-links {
-            list-style: none;
-            display: flex;
-            gap: 25px;
-            font-family: var(--font-mono);
-            font-size: 0.9rem;
-        }
-
-        .nav-links a {
-            color: var(--text-mute);
-            text-decoration: none;
-            transition: color 0.2s;
-        }
-
-        .nav-links a:hover {
-            color: var(--accent-primary);
-        }
-
-        /* Hero Layout Split Two Side */
-        .hero {
-            min-height: calc(100vh - 80px);
-            display: flex;
-            align-items: center;
-            padding: 60px 0;
-        }
-
-        .hero-wrapper {
-            display: grid;
-            grid-template-columns: 1.3fr 1fr;
-            gap: 60px;
-            align-items: center;
-            width: 100%;
-        }
-
-        .hero-content {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .console-line {
-            font-family: var(--font-mono);
-            font-size: 0.95rem;
-            margin-bottom: 8px;
-        }
-
-        .usr-prompt { color: #b1e8e8; font-weight: bold; }
-        .usr-cmd { color: var(--text-main); }
-
-        .console-response {
-            font-family: var(--font-mono);
-            color: var(--text-mute);
-            font-size: 0.9rem;
-            margin-bottom: 25px;
-        }
-
-        .main-headline {
-            font-size: 3rem;
-            font-weight: 800;
-            line-height: 1.15;
-            color: var(--text-main);
-            margin-bottom: 20px;
-            letter-spacing: -0.04em;
-        }
-
-        .main-description {
-            font-size: 1.1rem;
-            color: var(--text-mute);
-            margin-bottom: 30px;
-        }
-
-        .status-box {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            padding: 10px 16px;
-            background-color: var(--bg-panel);
-            border-radius: 8px;
-            border: 1px solid var(--border-color);
-            margin-bottom: 35px;
-            font-size: 0.9rem;
-            color: var(--text-mute);
-            align-self: flex-start;
-        }
-
-        .status-dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background-color: var(--accent-primary);
-            box-shadow: 0 0 10px rgba(20, 241, 149, 0.6);
-        }
-
-        .hero-actions {
-            display: flex;
-            gap: 15px;
-        }
-
-        /* Visual Element Right Side */
-        .hero-visual {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            gap: 40px;
-        }
-
-        .avatar-wrapper {
-            width: 280px;
-            height: 280px;
-            border-radius: 50%;
-            overflow: hidden;
-            border: 3px solid var(--accent-primary);
-            box-shadow: 0 0 20px rgba(20, 241, 149, 0.2);
-        }
-
-        .profile-avatar {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .cube-container {
-            width: 100%;
-            height: 150px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            perspective: 400px;
-        }
-
-        .wireframe-cube {
-            width: 60px;
-            height: 60px;
-            position: relative;
-            transform-style: preserve-3d;
-            animation: rotateCube 12s infinite linear;
-        }
-
-        .wireframe-cube div {
-            position: absolute;
-            width: 60px;
-            height: 60px;
-            border: 1.5px solid var(--accent-primary);
-            background: transparent;
-            box-shadow: inset 0 0 8px rgba(20, 241, 149, 0.2);
-        }
-
-        .front  { transform: translateZ(30px); }
-        .back   { transform: rotateY(180deg) translateZ(30px); }
-        .left   { transform: rotateY(-90deg) translateZ(30px); }
-        .right  { transform: rotateY(90deg) translateZ(30px); }
-        .top    { transform: rotateX(90deg) translateZ(30px); }
-        .bottom { transform: rotateX(-90deg) translateZ(30px); }
-
-        @keyframes rotateCube {
-            0% { transform: rotateX(0deg) rotateY(0deg); }
-            100% { transform: rotateX(360deg) rotateY(360deg); }
-        }
-
-        /* Content Sections Styling */
-        .section-padding {
-            padding: 80px 0;
-            border-top: 1px solid var(--border-color);
-        }
-
-        .section-header {
-            margin-bottom: 40px;
-        }
-
-        .section-num {
-            display: block;
-            font-family: var(--font-mono);
-            font-size: 0.9rem;
-            color: var(--accent-primary);
-            margin-bottom: 5px;
-        }
-
-        .section-header h2 {
-            font-size: 2.2rem;
-            font-weight: 700;
-            color: var(--text-main);
-            letter-spacing: -0.02em;
-        }
-
-        #about p {
-            color: var(--text-mute);
-            font-size: 1.1rem;
-            margin-bottom: 25px;
-            max-width: 900px;
-        }
-
-        /* Skills Matrix Table */
-        .skills-table-wrapper {
-            background-color: var(--bg-panel);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            overflow: hidden;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        table th {
-            background-color: #16161a;
-            color: var(--text-main);
-            text-align: left;
-            padding: 18px 24px;
-            font-weight: 600;
-            border-bottom: 2px solid var(--border-color);
-        }
-
-        table td {
-            padding: 18px 24px;
-            color: var(--text-mute);
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        table tr:last-child td { border-bottom: none; }
-        table td b { color: var(--text-main); }
-
-        /* Project Cards Layout */
-        .projects-grid {
-            display: flex;
-            flex-direction: column;
-            gap: 25px;
-        }
-
-        .project-card {
-            background-color: var(--bg-panel);
-            border: 1px solid var(--border-color);
-            padding: 35px;
-            border-radius: 12px;
-            transition: all 0.2s ease;
-            border-left: 4px solid var(--border-color);
-        }
-
-        .project-card:hover {
-            border-left-color: var(--accent-primary);
-            transform: translateY(-3px);
-            border-color: rgba(20, 241, 149, 0.2);
-        }
-
-        .project-card h3 {
-            font-size: 1.4rem;
-            font-weight: 700;
-            margin-bottom: 12px;
-            color: var(--text-main);
-        }
-
-        .badges-wrapper {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 20px;
-        }
-
-        .badge {
-            padding: 5px 12px;
-            border-radius: 20px;
-            background-color: rgba(20, 241, 149, 0.08);
-            color: var(--accent-primary);
-            font-size: 0.8rem;
-            font-weight: 600;
-            text-transform: uppercase;
-        }
-
-        .project-card p {
-            color: var(--text-mute);
-            margin-bottom: 15px;
-        }
-
-        .project-card ul {
-            list-style: none;
-            color: var(--text-mute);
-            padding-left: 5px;
-        }
-
-        .project-card li {
-            position: relative;
-            padding-left: 20px;
-            margin-bottom: 8px;
-        }
-
-        .project-card li::before {
-            content: '→';
-            position: absolute;
-            left: 0;
-            color: var(--accent-primary);
-        }
-
-        footer {
-            padding: 50px 0;
-            border-top: 1px solid var(--border-color);
-            text-align: center;
-            font-size: 0.9rem;
-            color: var(--text-mute);
-        }
-
-        /* Responsive Breakpoints */
-        @media (max-width: 968px) {
-            .hero-wrapper { grid-template-columns: 1fr; text-align: center; gap: 40px; }
-            .status-box { align-self: center; }
-            .hero-actions { justify-content: center; }
-            .hero-visual { flex-direction: column-reverse; gap: 20px; }
-            .main-headline { font-size: 2.4rem; }
-        }
-        @media (max-width: 600px) {
-            .nav-links { display: none; }
-        }
-    </style>
+  @media(max-width:860px){
+    .hero{grid-template-columns:1fr;}
+    .hero-visual{height:280px;}
+    .about-grid{grid-template-columns:1fr;}
+    .skills-grid{grid-template-columns:1fr 1fr;}
+    .case-item{grid-template-columns:1fr; text-align:left;}
+    h1.headline{font-size:30px;}
+  }
+  @media(max-width:560px){
+    .navlinks{display:none;}
+    .skills-grid{grid-template-columns:1fr;}
+  }
+</style>
 </head>
 <body>
 
-    <!-- TOP NAVIGATION -->
-    <nav class="navbar">
-        <div class="container nav-container">
-            <div class="brand">
-                <span class="terminal-prompt">louis portfolio &gt;</span>
-            </div>
-            <ul class="nav-links">
-                <li><a href="#about">/ about</a></li>
-                <li><a href="#skills">/ skills</a></li>
-                <li><a href="#projects">/ projects</a></li>
-                <li><a href="#contact">/ contact</a></li>
-            </ul>
-        </div>
-    </nav>
+<div class="grid-bg"></div>
+<div class="vignette"></div>
 
-    <!-- HERO SECTION (TWO COLUMN LAYOUT) -->
-    <header class="hero">
-        <div class="container hero-wrapper">
-            
-            <div class="hero-content">
-                <div class="console-line">
-                    <span class="usr-prompt">guest@louis:~$</span> <span class="usr-cmd">whoami</span>
-                </div>
-                <div class="console-response">
-                    &gt; <span class="response-tag">full_stack_developer</span> · <span class="response-tag">cyber_security_student</span>
-                </div>
+<nav>
+  <div class="wrap">
+    <!-- Diubah hanya menjadi louis atas permintaanmu -->
+    <div class="logo mono">louis</div>
+    <ul class="navlinks mono">
+      <li><a href="#about">about</a></li>
+      <li><a href="#skills">skills</a></li>
+      <li><a href="#projects">projects</a></li>
+      <li><a href="#experience">experience</a></li>
+      <li><a href="#contact">contact</a></li>
+    </ul>
+  </div>
+</nav>
 
-                <h1 class="main-headline">
-                    Building digital systems, <br>
-                    <span class="highlight">securing them</span> from the ground up.
-                </h1>
+<div class="wrap">
+  <section class="hero">
+    <div>
+      <div class="term-line mono"><span class="prompt">guest@louis</span>:~$ whoami<span class="cursor"></span></div>
+      <div class="term-line mono" style="color:var(--text-muted)">&gt; full_stack_developer · cyber_security_student</div>
+      <h1 class="headline">Building digital systems,<br><span class="hl">securing them from the ground up.</span></h1>
+      <p class="sub">I am Louis Fernando Perangin Angin — an Informatics student at UPNVJ focused on building integrated full-stack applications with a foundational understanding of security architecture and vulnerability testing.</p>
+      <div class="status-line mono"><span class="dot"></span> status: actively developing local database architecture &amp; web security</div>
+      <div class="cta-row">
+        <a href="#projects" class="btn btn-primary">View projects</a>
+        <a href="#contact" class="btn btn-secondary">Contact me</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <img src="foto-profile.jpeg" alt="Louis Fernando" class="profile-img">
+      <canvas id="heroCanvas"></canvas>
+    </div>
+  </section>
 
-                <p class="main-description">
-                    I am Louis Fernando Perangin Angin — an Informatics student at UPNVJ focused on building integrated full-stack applications with a foundational understanding of security architecture and vulnerability testing.
-                </p>
+  <section id="about">
+    <div class="eyebrow">01 · Profile</div>
+    <h2 class="sec-title">About Me</h2>
+    <div class="about-grid">
+      <div>
+        <p>I combine digital product development expertise with a foundational understanding of vulnerability assessment. To me, efficient backend performance and robust user data security are two inseparable cornerstones of modern software engineering.</p>
+        <p>Active in the academic environment with a 3.88 GPA, while concurrently leading the multimedia division in the Cyber Security student study group to sharpen both my technical capabilities and leadership skills.</p>
+      </div>
+      <div class="stats">
+        <div class="stat"><div class="num mono">3.88</div><div class="lbl">Academic GPA (B.S. Informatics)</div></div>
+        <div class="stat"><div class="num mono">Full-Stack</div><div class="lbl">Combined Dev &amp; Ops Capabilities</div></div>
+      </div>
+    </div>
+  </section>
 
-                <div class="status-box">
-                    <span class="status-dot"></span>
-                    <span class="status-text">status: actively developing local database architecture &amp; web security</span>
-                </div>
+  <section id="skills">
+    <div class="eyebrow">02 · Capabilities</div>
+    <h2 class="sec-title">Skills &amp; Tools</h2>
+    <div class="skills-grid">
+      <div class="tilt-card"><div class="tilt-icon mono">&lt;/&gt;</div><h3>Full-Stack Development</h3><p>Building frontend and backend applications using Python, JavaScript, C++, MySQL, and JSON.</p></div>
+      <div class="tilt-card"><div class="tilt-icon mono">📦</div><h3>Mobile Development</h3><p>Android app development with Kotlin, SQLite local database architecture, and Material Design 3.</p></div>
+      <div class="tilt-card"><div class="tilt-icon mono">🔒</div><h3>Cyber Security Fundamentals</h3><p>Code security auditing, basic cryptography understanding, entry-level ethical hacking, and Kali Linux environment.</p></div>
+      <div class="tilt-card"><div class="tilt-icon mono">🌐</div><h3>Networking Labs</h3><p>Network topology simulation, routing, DHCP/DNS management using Cisco Packet Tracer and Wireshark.</p></div>
+      <div class="tilt-card"><div class="tilt-icon mono">⚙</div><h3>System Administration</h3><p>Local environment management, Ngrok tunneling, system broadcast integration, and persistent data management.</p></div>
+      <div class="tilt-card"><div class="tilt-icon mono">🎬</div><h3>Multimedia &amp; Creative</h3><p>Videography production, digital visual content editing, and community publication asset management coordination.</p></div>
+    </div>
+  </section>
 
-                <div class="hero-actions">
-                    <a href="#projects" class="btn btn-primary">View projects</a>
-                    <a href="#contact" class="btn btn-secondary">Contact me</a>
-                </div>
-            </div>
+  <section id="projects">
+    <div class="eyebrow">03 · Portfolio</div>
+    <h2 class="sec-title">Projects &amp; System Implementations</h2>
+    <div class="case-list">
+      <div class="case-item">
+        <span class="sev sev-android mono">Android</span>
+        <div><h3>BudgetBits: Personal Finance Application</h3><p>Built a daily allowance application utilizing atomic SQLite transaction logic to guarantee automated balance updates without memory overhead.</p></div>
+        <span class="case-arrow">→</span>
+      </div>
+      <div class="case-item">
+        <span class="sev sev-fullstack mono">Full-Stack</span>
+        <div><h3>Campus Mental Health Web Application</h3><p>Developed an end-to-end student mental health platform with a MySQL database, Ngrok local tunnel integration, and post-development source code security auditing analysis.</p></div>
+        <span class="case-arrow">→</span>
+      </div>
+      <div class="case-item">
+        <span class="sev sev-network mono">Network</span>
+        <div><h3>Secure Network Simulation &amp; Audit</h3><p>Designed computer network topology simulations using Cisco Packet Tracer and evaluated data packet traffic through Wireshark.</p></div>
+        <span class="case-arrow">→</span>
+      </div>
+    </div>
+  </section>
 
-            <div class="hero-visual">
-                <div class="avatar-wrapper">
-                    <!-- Gunakan nama file fotomu yang asli di sini -->
-                    <img src="foto-profile.jpeg" alt="Louis Fernando" class="profile-avatar" onerror="this.src='https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?q=80&w=300'">
-                </div>
-                
-                <!-- RUNNING WIREFRAME CUBE ANIMATION -->
-                <div class="cube-container">
-                    <div class="wireframe-cube">
-                        <div class="front"></div>
-                        <div class="back"></div>
-                        <div class="left"></div>
-                        <div class="right"></div>
-                        <div class="top"></div>
-                        <div class="bottom"></div>
-                    </div>
-                </div>
-            </div>
+  <section id="experience">
+    <div class="eyebrow">04 · Experience &amp; Leadership</div>
+    <h2 class="sec-title">Activity History</h2>
+    <div class="timeline">
+      <div class="tl-item"><div class="tl-date mono">2026 — Present</div><h3>Head of Multimedia Division, KSM Cyber Security UPNVJ</h3><p>Leading the team in digital content production, designing organizational branding, and collaborating across divisions to enhance community publication.</p></div>
+      <div class="tl-item"><div class="tl-date mono">2025</div><h3>Project Officer Open Recruitment, KSM Cyber Security UPNVJ</h3><p>Led the recruitment cycle for new members from timeline management and logistics distribution to organizing technical trial classes for prospective applicants.</p></div>
+      <div class="tl-item"><div class="tl-date mono">2025</div><h3>HRD Staff, KSM Cyber Security UPNVJ</h3><p>Assisted in designing internal training programs to develop technical capabilities and soft skills for members.</p></div>
+      <div class="tl-item"><div class="tl-date mono">2024 — 2025</div><h3>Junior Member of Videography Division, UKM UFO UPNVJ</h3><p>Contributed to the creative production team for activity documentation and university-level media coverage.</p></div>
+    </div>
+  </section>
 
-        </div>
-    </header>
+  <section id="contact">
+    <div class="contact-box">
+      <h2>Let's Collaborate</h2>
+      <p>Open for internship positions in software engineering, full-stack development, or digital systems project deployment.</p>
+      <div class="contact-links">
+        <a href="mailto:2410511003@mahasiswa.upnvj.ac.id">2410511003@mahasiswa.upnvj.ac.id</a>
+        <a href="https://linkedin.com/in/usernamekamu" target="_blank">linkedin.com/in/usernamekamu</a>
+        <a href="https://github.com/usernamekamu" target="_blank">github.com/usernamekamu</a>
+      </div>
+    </div>
+  </section>
+</div>
 
-    <main class="container">
-        
-        <!-- 01 . PROFILE SECTION -->
-        <section id="about" class="section-padding">
-            <div class="section-header">
-                <span class="section-num">01 · PROFILE</span>
-                <h2>About Me</h2>
-            </div>
-            <p>I combine digital product development expertise with a foundational understanding of vulnerability assessment. To me, efficient backend performance and robust user data security are two inseparable cornerstones of modern software engineering.</p>
-            <p>Active in the academic environment with a 3.88 GPA, while concurrently leading the multimedia division in the Cyber Security student study group to sharpen both my technical capabilities and leadership skills.</p>
-        </section>
+<footer>© 2026 Louis Fernando Perangin Angin — Built with a focus on functionality and security.</footer>
 
-        <!-- 02 . SKILLS MATRIX -->
-        <section id="skills" class="section-padding">
-            <div class="section-header">
-                <span class="section-num">02 · COMPETENCIES</span>
-                <h2>Core Skills Matrix</h2>
-            </div>
-            <div class="skills-table-wrapper">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Category</th>
-                            <th>Technical Expertise &amp; Tools</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><b>Cyber Security &amp; Networks</b></td>
-                            <td>Vulnerability Assessment, Ethical Hacking basics, Kali Linux, Wireshark, Cisco Packet Tracer</td>
-                        </tr>
-                        <tr>
-                            <td><b>Development &amp; Databases</b></td>
-                            <td>Full-Stack Web Dev, Python, C++, JavaScript, MySQL, SQLite, JSON</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </section>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+  // 3D Matrix Cube Network Object in Hero
+  const canvas = document.getElementById('heroCanvas');
+  const renderer = new THREE.WebGLRenderer({canvas, alpha:true, antialias:true});
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 100);
+  camera.position.z = 6;
 
-        <!-- 03 . FEATURED PROJECTS -->
-        <section id="projects" class="section-padding">
-            <div class="section-header">
-                <span class="section-num">03 · PORTFOLIO</span>
-                <h2>Featured Projects</h2>
-            </div>
-            
-            <div class="projects-grid">
-                <div class="project-card">
-                    <h3>BudgetBits: Personal Finance Application</h3>
-                    <div class="badges-wrapper">
-                        <span class="badge">Kotlin</span> <span class="badge">SQLite</span> <span class="badge">Android</span>
-                    </div>
-                    <p>A data-driven mobile application engineered with an atomic local database architecture to prevent transactional balance mismatch inconsistencies.</p>
-                    <ul>
-                        <li>Designed relational schemas and thread-safe CRUD mutations via explicit SQLite transactions.</li>
-                        <li>Authored detailed technical and algorithmic logic documentation for the data pipeline.</li>
-                    </ul>
-                </div>
+  function resize(){
+    const w = canvas.clientWidth, h = canvas.clientHeight;
+    renderer.setSize(w, h, false);
+    camera.aspect = w/h;
+    camera.updateProjectionMatrix();
+  }
+  window.addEventListener('resize', resize);
 
-                <div class="project-card">
-                    <h3>Campus Mental Health Web Portal</h3>
-                    <div class="badges-wrapper">
-                        <span class="badge">Python</span> <span class="badge">MySQL</span> <span class="badge">Ngrok</span>
-                    </div>
-                    <p>A full-stack application engineered to support student well-being, integrated with dynamic databases and subjected to extensive security auditing.</p>
-                    <ul>
-                        <li>Managed full backend logic implementation and secure integration via localized tunnels.</li>
-                        <li>Conducted source-code security analysis to secure application data vectors from threat actions.</li>
-                    </ul>
-                </div>
-            </div>
-        </section>
+  const group = new THREE.Group();
+  scene.add(group);
 
-    </main>
+  const geo = new THREE.BoxGeometry(1.8, 1.8, 1.8, 2, 2, 2);
+  const wireMat = new THREE.MeshBasicMaterial({color:0x5eead4, wireframe:true, transparent:true, opacity:0.6});
+  const coreBox = new THREE.Mesh(geo, wireMat);
+  group.add(coreBox);
 
-    <!-- FOOTER -->
-    <footer id="contact">
-        <div class="container">
-            <p>© 2026 Louis Fernando Perangin Angin. Powered by GitHub Pages.</p>
-        </div>
-    </footer>
+  const innerGeo = new THREE.OctahedronGeometry(1, 0);
+  const innerMat = new THREE.MeshBasicMaterial({color:0xffb454, wireframe:true, transparent:true, opacity:0.4});
+  const innerCore = new THREE.Mesh(innerGeo, innerMat);
+  group.add(innerCore);
 
+  const nodes = [];
+  for(let i=0;i<12;i++){
+    const nGeo = new THREE.SphereGeometry(0.04, 8, 8);
+    const nMat = new THREE.MeshBasicMaterial({color: i % 2 === 0 ? 0xffb454 : 0x5eead4});
+    const node = new THREE.Mesh(nGeo, nMat);
+    const radius = 2.2 + Math.random()*0.5;
+    const angle = Math.random()*Math.PI*2;
+    const tilt = Math.random()*Math.PI;
+    node.userData = {radius, angle, tilt, speed: 0.15 + Math.random()*0.2};
+    nodes.push(node);
+    scene.add(node);
+  }
+
+  let mouseX = 0, mouseY = 0;
+  document.addEventListener('mousemove', (e)=>{
+    mouseX = (e.clientX / window.innerWidth - 0.5);
+    mouseY = (e.clientY / window.innerHeight - 0.5);
+  });
+
+  const clock = new THREE.Clock();
+  function animate(){
+    requestAnimationFrame(animate);
+    const t = clock.getElapsedTime();
+    coreBox.rotation.y = t * 0.2;
+    coreBox.rotation.x = t * 0.15;
+    innerCore.rotation.y = -t * 0.3;
+    innerCore.rotation.x = t * 0.1;
+
+    group.rotation.y += (mouseX*0.5 - group.rotation.y)*0.05;
+    group.rotation.x += (-mouseY*0.3 - group.rotation.x)*0.05;
+
+    nodes.forEach(node=>{
+      const d = node.userData;
+      const a = d.angle + t*d.speed;
+      node.position.set(
+        Math.cos(a)*d.radius,
+        Math.sin(a)*d.radius*Math.cos(d.tilt),
+        Math.sin(a)*d.radius*Math.sin(d.tilt)
+      );
+    });
+
+    renderer.render(scene, camera);
+  }
+  resize();
+  animate();
+
+  // 3D tilt interaction on skill cards
+  document.querySelectorAll('.tilt-card').forEach(card=>{
+    card.style.perspective = '600px';
+    card.addEventListener('mousemove', (e)=>{
+      const r = card.getBoundingClientRect();
+      const x = (e.clientX - r.left)/r.width - 0.5;
+      const y = (e.clientY - r.top)/r.height - 0.5;
+      card.style.transform = `rotateY(${x*12}deg) rotateX(${-y*12}deg) translateZ(6px)`;
+    });
+    card.addEventListener('mouseleave', ()=>{
+      card.style.transform = 'rotateY(0) rotateX(0)';
+    });
+  });
+</script>
 </body>
 </html>
