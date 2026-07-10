@@ -3,43 +3,126 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Louis Fernando | Web & Cyber Security Portfolio</title>
+    <title>Louis Fernando | Portfolio</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-    <header>
-        <div class="container">
-            <!-- Updated Terminal Prompt Style -->
-            <div class="terminal-header">
+    <!-- NAV BARISAN ATAS -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <!-- Prompt Baru sesuai request -->
+            <div class="brand">
                 <span class="terminal-prompt">louis portfolio ></span>
             </div>
-            <h1>Louis Fernando Perangin Angin</h1>
-            <p>Informatics Student @ UPNVJ | Full-Stack Developer & Cyber Security Enthusiast</p>
-            <div class="links">
-                <a href="mailto:2410511003@mahasiswa.upnvj.ac.id">Email</a> | 
-                <a href="https://github.com/Luiz6699" target="_blank">GitHub</a> | 
-                <a href="https://linkedin.com/in/Luiz6699" target="_blank">LinkedIn</a>
+            <ul class="nav-links">
+                <li><a href="#about">/ about</a></li>
+                <li><a href="#skills">/ skills</a></li>
+                <li><a href="#projects">/ projects</a></li>
+                <li><a href="#organization">/ organization</a></li>
+                <li><a href="#contact">/ contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION (HALAMAN UTAMA) -->
+    <header class="hero">
+        <div class="container hero-wrapper">
+            
+            <!-- SISI KIRI: TEXT TERMINAL -->
+            <div class="hero-content">
+                <div class="console-line">
+                    <span class="usr-prompt">guest@louis:~$</span> <span class="usr-cmd">whoami</span>
+                </div>
+                <div class="console-response">
+                    <span class="response-tag">> full_stack_developer</span> · <span class="response-tag">cyber_security_student</span>
+                </div>
+
+                <h1 class="main-headline">
+                    Building digital systems, <br>
+                    <span class="highlight">securing them</span> from the ground up.
+                </h1>
+
+                <p class="main-description">
+                    I am Louis Fernando Perangin Angin — an Informatics student at UPNVJ focused on building integrated full-stack applications with a foundational understanding of security architecture and vulnerability testing.
+                </p>
+
+                <div class="status-box">
+                    <span class="status-dot"></span>
+                    <span class="status-text">status: actively developing local database architecture & web security</span>
+                </div>
+
+                <div class="hero-actions">
+                    <a href="#projects" class="btn btn-primary">View projects</a>
+                    <a href="#contact" class="btn btn-secondary">Contact me</a>
+                </div>
             </div>
+
+            <!-- SISI KANAN: FOTO PROFIL & KUBUS ANIMASI -->
+            <div class="hero-visual">
+                <div class="avatar-wrapper">
+                    <img src="foto-profile.jpeg" alt="Louis Fernando" class="profile-avatar">
+                </div>
+                <!-- Tempat Kubus 3D Animasi berjalan -->
+                <div class="cube-container">
+                    <div class="wireframe-cube"></div>
+                </div>
+            </div>
+
         </div>
     </header>
 
+    <!-- 01 . PROFILE SECTION -->
     <main class="container">
-        <!-- 01 . PROFILE SECTION -->
-        <section id="about">
-            <h2>01 · PROFILE</h2>
-            <h3>About Me</h3>
+        <section id="about" class="section-padding">
+            <div class="section-header">
+                <span class="section-num">01 · PROFILE</span>
+                <h2>About Me</h2>
+            </div>
             <p>I combine digital product development expertise with a foundational understanding of vulnerability assessment. To me, efficient backend performance and robust user data security are two inseparable cornerstones of modern software engineering.</p>
             <p>Active in the academic environment with a 3.88 GPA, while concurrently leading the multimedia division in the Cyber Security student study group to sharpen both my technical capabilities and leadership skills.</p>
         </section>
 
-        <!-- 02 . PROJECTS SECTION -->
-        <section id="projects">
-            <h2>02 · FEATURED PROJECTS</h2>
+        <!-- 02 . SKILLS SECTION -->
+        <section id="skills" class="section-padding">
+            <div class="section-header">
+                <span class="section-num">02 · COMPETENCIES</span>
+                <h2>Core Skills Matrix</h2>
+            </div>
+            <div class="skills-table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Category</th>
+                            <th>Technical Expertise & Tools</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><b>Cyber Security & Networks</b></td>
+                            <td>Vulnerability Assessment, Ethical Hacking basics, Kali Linux, Wireshark, Cisco Packet Tracer</td>
+                        </tr>
+                        <tr>
+                            <td><b>Development & Databases</b></td>
+                            <td>Full-Stack Web Dev, Python, C++, JavaScript, MySQL, SQLite, JSON</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- 03 . PROJECTS SECTION -->
+        <section id="projects" class="section-padding">
+            <div class="section-header">
+                <span class="section-num">03 · PORTFOLIO</span>
+                <h2>Featured Projects</h2>
+            </div>
             
             <div class="project-card">
                 <h3>BudgetBits: Personal Finance Application</h3>
-                <span class="badge">Kotlin</span> <span class="badge">SQLite</span> <span class="badge">Android</span>
+                <div class="badges-wrapper">
+                    <span class="badge">Kotlin</span> <span class="badge">SQLite</span> <span class="badge">Android</span>
+                </div>
                 <p>A data-driven mobile application engineered with an atomic local database architecture to prevent transactional balance mismatch inconsistencies.</p>
                 <ul>
                     <li>Designed relational schemas and thread-safe CRUD mutations via explicit SQLite transactions.</li>
@@ -49,7 +132,9 @@
 
             <div class="project-card">
                 <h3>Campus Mental Health Web Portal</h3>
-                <span class="badge">Python</span> <span class="badge">MySQL</span> <span class="badge">Ngrok</span>
+                <div class="badges-wrapper">
+                    <span class="badge">Python</span> <span class="badge">MySQL</span> <span class="badge">Ngrok</span>
+                </div>
                 <p>A full-stack application engineered to support student well-being, integrated with dynamic databases and subjected to extensive security auditing.</p>
                 <ul>
                     <li>Managed full backend logic implementation and secure integration via localized tunnels.</li>
@@ -57,30 +142,13 @@
                 </ul>
             </div>
         </section>
-
-        <!-- 03 . SKILLS SECTION -->
-        <section id="skills">
-            <h2>03 · CORE SKILLS MATRIX</h2>
-            <table>
-                <tr>
-                    <th>Category</th>
-                    <th>Technical Expertise & Tools</th>
-                </tr>
-                <tr>
-                    <td><b>Cyber Security & Networks</b></td>
-                    <td>Vulnerability Assessment, Ethical Hacking basics, Kali Linux, Wireshark, Cisco Packet Tracer</td>
-                </tr>
-                <tr>
-                    <td><b>Development & Databases</b></td>
-                    <td>Full-Stack Web Dev, Python, C++, JavaScript, MySQL, SQLite, JSON</td>
-                </tr>
-            </table>
-        </section>
     </main>
 
-    <footer>
-        <p>© 2026 Louis Fernando Perangin Angin. Powered by GitHub Pages.</p>
+    <footer id="contact">
+        <div class="container footer-content">
+            <p>© 2026 Louis Fernando Perangin Angin. Powered by GitHub Pages.</p>
+        </div>
     </footer>
 
 </body>
-</html>
+</html> 
