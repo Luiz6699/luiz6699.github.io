@@ -255,10 +255,27 @@
   }
   .contact-box h2{font-size:26px; margin:0 0 12px; font-weight:500;}
   .contact-box p{color:var(--text-muted); margin:0 0 28px;}
-  .contact-links{display:flex; gap:18px; justify-content:center; flex-wrap:wrap;}
-  .contact-links a{color:var(--text-primary); text-decoration:none; font-size:13px; font-family:'JetBrains Mono',monospace; border:1px solid var(--border-strong); padding:10px 18px; border-radius:4px; transition:all .2s;}
-  .contact-links a:hover{border-color:var(--cyan); color:var(--cyan);}
-
+  .contact-links a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px; /* Jarak manis antara ikon SVG dan teks */
+  color: var(--text-primary);
+  text-decoration: none;
+  font-size: 13px;
+  font-family: 'JetBrains Mono', monospace;
+  border: 1px solid var(--border);
+  padding: 12px 20px;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+.contact-links a svg {
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
+}
+.contact-links a:hover svg {
+  transform: scale(1.1); /* Efek ikon sedikit membesar pas di-hover */
+}
   footer{padding:32px 0; text-align:center; color:var(--text-muted); font-size:12px; border-top:1px solid var(--border);}
 
   @media(max-width:968px){
@@ -275,6 +292,48 @@
   @media(max-width:560px){
     .navlinks{display:none;}
     .skills-grid{grid-template-columns:1fr;}
+  }
+  /* Styling Foto Dokumentasi Organisasi */
+  /* Styling Foto Dokumentasi Organisasi - Diperkecil & Ditengahkan */
+  .org-gallery {
+    margin: 0 auto 35px auto; /* Membuat margin otomatis kiri-kanan agar ke tengah */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 500px; /* Kita kunci lebarnya di 500px agar tidak kebesaran */
+    width: 100%;
+  }
+  .org-photo-wrapper {
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.5);
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    width: 100%;
+  }
+  .org-photo-wrapper:hover {
+    border-color: var(--cyan);
+    box-shadow: 0 0 20px rgba(94, 234, 212, 0.25);
+    transform: translateY(-3px);
+  }
+  .org-photo {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+    filter: grayscale(15%);
+    transition: filter 0.3s ease;
+  }
+  .org-photo-wrapper:hover .org-photo {
+    filter: grayscale(0%);
+  }
+  .org-caption {
+    font-size: 11px;
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--text-muted);
+    margin-top: 10px;
+    text-align: center; /* Teks takarir juga ikut ke tengah */
   }
 </style>
 </head>
@@ -294,7 +353,25 @@
 <div class="fade-in-up">
   <nav>
     <div class="wrap">
-      <div class="logo mono">louis</div>
+      <div class="logo mono" style="display: inline-flex; align-items: center;">
+  
+  <style>
+    .spinning-command-icon {
+      animation: spin-loop 12s linear infinite;
+      transform-origin: center;
+    }
+    @keyframes spin-loop {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+  </style>
+
+  <svg class="spinning-command-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#4fd1c5" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M18 3a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3H6a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3V6a3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3h12a3 3 0 0 0 3-3 3 3 0 0 0-3-3z"></path>
+    <path d="M12 2a10 10 0 0 1 7.54 3.42M21 12a10 10 0 0 1-3.42 7.54M12 22a10 10 0 0 1-7.54-3.42M3 12a10 10 0 0 1 3.42-7.54" stroke-width="1" stroke-dasharray="3 3" opacity="0.5"></path>
+  </svg>
+  
+</div>
       <ul class="navlinks mono">
         <li><a href="#about">about</a></li>
         <li><a href="#skills">skills</a></li>
@@ -308,7 +385,7 @@
   <div class="wrap">
     <section class="hero">
       <div>
-        <div class="term-line mono"><span class="prompt">guest@louis</span>:~$ whoami<span class="cursor"></span></div>
+        <div class="term-line mono"><span class="prompt">introduce</span> I'm <span class="cursor"></span></div>
         <div class="term-line mono" style="color:var(--text-muted)">&gt; full_stack_developer · cyber_security_student</div>
         <h1 class="headline">Building digital systems,<br><span class="hl">securing them from the ground up.</span></h1>
         <p class="sub">I am Louis Fernando Perangin Angin — an Informatics student at UPNVJ focused on building integrated full-stack applications with a foundational understanding of security architecture and vulnerability testing.</p>
@@ -339,108 +416,227 @@
       </div>
     </section>
 
-    <section id="skills">
-      <div class="eyebrow">02 · Core Technologies</div>
+    <section id="skills"><section id="skills">
+      <div class="eyebrow">02 · CORE TECHNOLOGIES</div>
       <h2 class="sec-title">Tech Stack &amp; Tools</h2>
+
       <div class="skills-grid">
-        
+        <!-- 1. JAVA (MENGGUNAKAN PATH CYAN GLOWING YANG PRESISI & SIMETRIS) -->
         <div class="tech-card">
           <div class="tech-logo">
-            <svg viewBox="0 0 24 24"><path fill="#EA2D2E" d="M11.523 15.65c-.092-.01-.157-.02-.19-.028-.27-.066-.462-.132-.572-.196-.407-.234-.582-.556-.516-.95.033-.21.144-.42.33-.62.29-.315.787-.562 1.49-.74l.95-.236c1.68-.42 2.662-.835 2.946-1.246.162-.234.204-.492.12-.767a1.077 1.077 0 0 0-.64-.755c-.328-.152-.897-.23-1.706-.234-.954 0-1.68.106-2.176.32a3.864 3.864 0 0 0-1.42 1.133l-1.92-1.127a5.79 5.79 0 0 1 2.366-2.036c.928-.432 2.062-.648 3.4-.648.968 0 1.776.082 2.423.245 1.08.272 1.83.748 2.25 1.42.3.483.392 1.04.27 1.673-.133.684-.543 1.25-1.233 1.696-.644.417-1.758.784-3.34 1.1l-.813.167c-.822.164-1.325.323-1.507.476-.084.07-.11.14-.078.21.037.085.156.14.354.168.113.015.305.022.576.022.863 0 1.693-.146 2.49-.44a8.887 8.887 0 0 0 2.238-1.2l1.373 1.517a9.96 9.96 0 0 1-2.9 1.67c-1.157.452-2.453.68-3.883.68-.142 0-.317-.005-.526-.015zM22.036 3.12c.16.59-.08 1.192-.61 1.576a4.572 4.572 0 0 1-2.46.72c-1.157 0-2.115-.403-2.875-1.21-.52-.55-.747-1.134-.68-1.752.066-.59.352-1.07 1.246-1.41a4.2 4.2 0 0 1 1.616-.27c1.354 0 2.417.447 3.193 1.34.4.46.61.643.57 1.007zm-7.693 12.352c.427-.478.785-1.05 1.074-1.716l2.023.774c-.454 1.026-1.037 1.874-1.75 2.544a5.98 5.98 0 0 1-3.87 1.896c-.53 0-.964-.066-1.306-.2-.685-.262-1.066-.757-1.145-1.482-.072-.67.14-1.385.638-2.146.43-.654.983-1.138 1.66-1.45.31-.144.757-.272 1.344-.383l-.048-.383c-.053-.414-.194-.716-.425-.903-.23-.188-.588-.282-1.07-.282-.577 0-1.045.105-1.406.315-.36.21-.634.58-.82 1.107l-2.02-.75a4.852 4.852 0 0 1 1.954-2.247c.75-.466 1.702-.7 2.854-.7 1.15 0 2.022.25 2.616.748.594.5 1.002 1.173 1.22 2.02l.606 2.378c.17.674.398 1.144.68 1.41a.887.887 0 0 0 .546.19c.142 0 .307-.033.493-.1z"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M6 2c0 2 2 3 2 5M10 1c0 3 2 4 2 7M14 2c0 2 2 3 2 5"/>
+              <path d="M18 10H5v6c0 2.2 1.8 4 4 4h4c2.2 0 4-1.8 4-4v-6z"/>
+              <path d="M18 12h2a2 2 0 0 1 2 2v1a2 2 0 0 1-2 2h-2"/>
+              <line x1="3" y1="23" x2="21" y2="23"/>
+            </svg>
           </div>
           <h3>Java</h3>
           <span>Backend &amp; Desktop</span>
         </div>
 
+        <!-- 2. KOTLIN -->
         <div class="tech-card">
           <div class="tech-logo">
-            <svg viewBox="0 0 24 24"><path fill="#7F52FF" d="M24 24H0V0h24L12 12z"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="#8B5CF6" d="M24 24H0V0h24L12 12z"/></svg>
           </div>
           <h3>Kotlin</h3>
           <span>Mobile Development</span>
         </div>
 
+        <!-- 3. PYTHON -->
         <div class="tech-card">
           <div class="tech-logo">
-            <svg viewBox="0 0 24 24"><path fill="#3776AB" d="M11.93 0C5.353 0 5.655 2.846 5.655 2.846l.006 2.946h6.417v.9H3.34S0 7.027 0 13.513c0 6.487 2.936 6.273 2.936 6.273h1.75v-2.457s-.057-2.947 2.91-2.947h6.452s2.916-.043 2.916-2.85V5.57s.245-5.57-5.034-5.57zM8.567 1.832a.916.916 0 1 1 0 1.832.916.916 0 0 1 0-1.832zm3.503 22.168c6.577 0 6.275-2.846 6.275-2.846l-.006-2.946h-6.417v-.9h8.739S24 16.973 24 10.487c0-6.487-2.936-6.273-2.936-6.273h-1.75v2.457s.057 2.947-2.91 2.947H9.952s-2.916.043-2.916 2.85v5.961s-.245 5.57 5.034 5.57zm3.363-1.832a.916.916 0 1 1 0-1.832.916.916 0 0 1 0 1.832z"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="#3776AB" d="M11.93 0C5.353 0 5.655 2.846 5.655 2.846l.006 2.946h6.417v.9H3.34S0 7.027 0 13.513c0 6.487 2.936 6.273 2.936 6.273h1.75v-2.457s-.057-2.947 2.91-2.947h6.452s2.916-.043 2.916-2.85V5.57s.245-5.57-5.034-5.57zM8.567 1.832a.916.916 0 1 1 0 1.832.916.916 0 0 1 0-1.832zm3.503 22.168c6.577 0 6.275-2.846 6.275-2.846l-.006-2.946h-6.417v-.9h8.739S24 16.973 24 10.487c0-6.487-2.936-6.273-2.936-6.273h-1.75v2.457s.057 2.947-2.91 2.947H9.952s-2.916.043-2.916 2.85v5.961s-.245 5.57 5.034 5.57zm3.363-1.832a.916.916 0 1 1 0-1.832.916.916 0 0 1 0 1.832z"/></svg>
           </div>
           <h3>Python</h3>
           <span>AI &amp; Scripting</span>
         </div>
 
+        <!-- 4. C++ -->
         <div class="tech-card">
           <div class="tech-logo">
-            <svg viewBox="0 0 24 24"><path fill="#00599C" d="M21.75 10.5h-1.5v-1.5h-1.5v1.5h-1.5v1.5h1.5v1.5h1.5v-1.5h1.5zm2.25 0h-1.5v-1.5h-1.5v1.5h-1.5v1.5h1.5v1.5h1.5v-1.5h1.5zm-14.246 5.253c-1.5 0-2.812-.916-3.328-2.253h7.104c-.516 1.337-1.828 2.253-3.328 2.253zm0-7.506c1.5 0 2.812.916 3.328 2.253H6.426c.516-1.337 1.828-2.253 3.328-2.253zM9.754 0C4.364 0 0 4.364 0 9.754s4.364 9.754 9.754 9.754c3.488 0 6.544-1.833 8.246-4.602h-3.41c-1.157 1.41-2.934 2.302-4.836 2.302-3.564 0-6.454-2.89-6.454-6.454s2.89-6.454 6.454-6.454c1.902 0 3.68.892 4.836 2.302h3.41C16.298 1.833 13.242 0 9.754 0z"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#00599C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M15 9a4.5 4.5 0 1 0 0 6M19 12h4M21 10v4"/></svg>
           </div>
           <h3>C++</h3>
           <span>System &amp; Logic</span>
         </div>
 
+        <!-- 5. JAVASCRIPT (SUDAH DI-PADDING INTERNAL SUPAYA KOTAK KUNINGNYA PRESISI & TIDAK TERPOTONG) -->
         <div class="tech-card">
-          <div class="tech-logo">
-            <svg viewBox="0 0 24 24"><path fill="#F7DF1E" d="M0 0h24v24H0z"/><path d="M24 24h-6.07c0-1.12-.66-1.6-1.42-1.6-.74 0-1.13.43-1.13 1.1v.05c0 .77.63 1.13 1.44 1.4l1.37.47c1.83.62 2.76 1.48 2.76 3.42v.06c0 2.1-1.63 3.52-4.14 3.52-2.43 0-3.95-1.18-4.32-3.3h2.67c.23.9.96 1.32 1.63 1.32.74 0 1.37-.39 1.37-1.22v-.06c0-.8-.5-.13-1.5-.47l-1.3-.44c-1.74-.6-2.58-1.48-2.58-3.23v-.06c0-1.92 1.47-3.36 3.86-3.36 2.16 0 3.63.98 4.07 2.8H24V24zM10.87 30h-2.5v-6.38H5.2V21.5h5.67V30z" transform="scale(0.8) translate(3, 3)"/></svg>
+          <div class="tech-logo" style="display: flex; align-items: center; justify-content: center; width: 100%; height: 100%;">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" style="width: 34px; height: 34px; border-radius: 4px; overflow: hidden;">
+              <path d="M0 0h24v24H0V0z" fill="#F7DF1E"/>
+              <path d="M12 17.6c0 .8-.3 1.4-.8 1.8-.5.4-1.2.6-2.1.6-1 0-1.8-.3-2.3-.9l1.1-1.1c.4.4.8.6 1.2.6.3 0 .6-.1.8-.2.2-.1.3-.4.3-.7v-5.2h1.8v5.7zm6.6-1.1c0 1.1-.4 1.9-1.1 2.4-.7.5-1.7.8-2.9.8-1.2 0-2.2-.3-2.9-.9l1-1.2c.6.5 1.2.7 1.9.7.5 0 .9-.1 1.2-.3.3-.2.4-.5.4-.8 0-.3-.1-.5-.4-.7-.2-.2-.7-.4-1.3-.6-.9-.3-1.6-.7-2-1.1-.4-.5-.6-1.1-.6-1.9 0-1 .4-1.8 1.1-2.3.7-.5 1.6-.7 2.7-.7 1 0 1.8.2 2.5.7l-.9 1.2c-.5-.4-1.1-.6-1.6-.6-.4 0-.7.1-.9.3-.2.1-.3.4-.3.6 0 .3.1.5.4.7.2.2.6.3 1.2.5.9.3 1.6.7 2 1.2.5.5.7 1.2.7 2.1z" fill="#000000"/>
+            </svg>
           </div>
           <h3>JavaScript</h3>
           <span>Web Applications</span>
         </div>
 
+        <!-- 6. KALI LINUX -->
         <div class="tech-card">
           <div class="tech-logo">
-            <svg viewBox="0 0 24 24"><path fill="#5EEAD4" d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10zm0-18.2l5.5 2.1v4.6c0 3.9-2.5 7.4-5.5 8.4-3-1-5.5-4.5-5.5-8.4V5.9L12 3.8z"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
           </div>
           <h3>Kali Linux</h3>
           <span>Sec Auditing &amp; CTF</span>
         </div>
 
+        <!-- 7. WIRESHARK -->
         <div class="tech-card">
           <div class="tech-logo">
-            <svg viewBox="0 0 24 24"><path fill="#049FD9" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 13v1c0 1.1.9 2 2 2v1.93zm6.9-2.53c-.26-.81-1-1.4-1.9-1.4h-1v-3c0-.55-.45-1-1-1h-6v-2h2c.55 0 1-.45 1-1V5h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#34A2DC" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/></svg>
           </div>
           <h3>Wireshark</h3>
           <span>Network &amp; Protocols</span>
         </div>
 
+        <!-- 8. MYSQL / SQLITE -->
         <div class="tech-card">
           <div class="tech-logo">
-            <svg viewBox="0 0 24 24"><path fill="#00758F" d="M12 2c5.522 0 10 1.79 10 4s-4.478 4-10 4S2 8.21 2 6s4.478-4 10-4zm0 6c4.418 0 8-1.343 8-3s-3.582-3-8-3-8 1.343-8 3 3.582 3 8 3zm0 4c5.522 0 10 1.79 10 4s-4.478 4-10 4S2 18.21 2 16s4.478-4 10-4zm0 6c4.418 0 8-1.343 8-3s-3.582-3-8-3-8 1.343-8 3 3.582 3 8 3z"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"></ellipse><path d="M3 5v6c0 1.66 4 3 9 3s9-1.34 9-3V5"/><path d="M3 11v6c0 1.66 4 3 9 3s9-1.34 9-3v-6"/></svg>
           </div>
           <h3>MySQL / SQLite</h3>
           <span>Database Architecture</span>
         </div>
-
       </div>
     </section>
 
+    
     <section id="projects">
-      <div class="eyebrow">03 · Portfolio</div>
-      <h2 class="sec-title">Projects &amp; System Implementations</h2>
-      <div class="case-list">
-        <div class="case-item">
-          <span class="sev sev-android mono">Android</span>
-          <div><h3>BudgetBits: Personal Finance Application</h3><p>Built a daily allowance application utilizing atomic SQLite transaction logic to guarantee automated balance updates without memory overhead.</p></div>
-          <span class="case-arrow">→</span>
-        </div>
-        <div class="case-item">
-          <span class="sev sev-fullstack mono">Full-Stack</span>
-          <div><h3>Campus Mental Health Web Application</h3><p>Developed an end-to-end student mental health platform with a MySQL database, Ngrok local tunnel integration, and post-development source code security auditing analysis.</p></div>
-          <span class="case-arrow">→</span>
-        </div>
-        <div class="case-item">
-          <span class="sev sev-network mono">Network</span>
-          <div><h3>Secure Network Simulation &amp; Audit</h3><p>Designed computer network topology simulations using Cisco Packet Tracer and evaluated data packet traffic through Wireshark.</p></div>
-          <span class="case-arrow">→</span>
+  <div class="eyebrow">03 . Portfolio</div>
+  <h2 class="sec-title">Projects &amp; System Implementations</h2>
+  
+  <!-- 1. DAFTAR KARTU PROYEK (BIARKAN TETAP BERADA DI DALAM KOTAK INI) -->
+  <div class="case-list">
+    
+    <!-- KARTU BUDGETBITS (Tambahkan onclick di sini) -->
+    <div class="case-item" onclick="toggleProjectDetail()" style="cursor: pointer;">
+      <span class="sev sev-android mono">Android</span>
+      <div>
+        <h3>BudgetBits: Personal Finance Application</h3>
+        <p>Built a daily allowance application utilizing atomic SQLite transaction logic to guarantee automated balance updates without memory overhead.</p>
+      </div>
+      <span class="case-arrow">&rarr;</span>
+    </div>
+
+  <div class="case-item" onclick="toggleMentalHealthDetail()" style="cursor: pointer;">
+  <span class="sev sev-fullstack mono">Full-Stack</span>
+  <div>
+    <h3>Campus Mental Health Web Application</h3>
+    <p>Developed an end-to-end student mental health platform with a MySQL database, Ngrok local tunnel integration, and post-development source code security auditing analysis.</p>
+  </div>
+  <span class="case-arrow">&rarr;</span>
+</div>
+
+<div id="mentalhealth-detail-section" style="display: none; max-height: 0; overflow: hidden; opacity: 0; transition: all 0.5s ease-in-out; width: 100%; margin-top: 20px;">
+  <div style="display: flex; align-items: center; justify-content: space-between; gap: 40px; background-color: #0b111e; padding: 30px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.05); text-align: left; width: 100%;">
+    
+    <div style="flex: 1; max-width: 45%;">
+      <span style="text-transform: uppercase; letter-spacing: 2px; color: #10b981; font-size: 11px; font-weight: 700;">Full-Stack &amp; Security Breakdown</span>
+      <h3 style="font-size: 26px; font-weight: 800; margin: 5px 0 15px 0; color: #ffffff;">Campus Mental Health Web Architecture</h3>
+      <p style="color: #94a3b8; line-height: 1.6; font-size: 14px; margin-bottom: 15px;">
+        Engineered a secure full-stack web platform using Python and MySQL database architecture. Due to production server limitations, the live environment was audited and demonstrated using Ngrok secure tunneling services.
+      </p>
+      <p style="color: #94a3b8; line-height: 1.6; font-size: 14px; margin-bottom: 20px;">
+        <strong>Repository Status:</strong> The complete development history, source code, database migration scripts, and post-development vulnerability assessment reports are fully documented on GitHub.
+      </p>
+      <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 25px;">
+        <span style="background: rgba(16, 185, 129, 0.1); color: #10b981; padding: 4px 10px; border-radius: 20px; font-size: 12px; font-weight: 600;">Python</span>
+        <span style="background: rgba(16, 185, 129, 0.1); color: #10b981; padding: 4px 10px; border-radius: 20px; font-size: 12px; font-weight: 600;">MySQL</span>
+        <span style="background: rgba(16, 185, 129, 0.1); color: #10b981; padding: 4px 10px; border-radius: 20px; font-size: 12px; font-weight: 600;">Ngrok Tunnel</span>
+      </div>
+      
+      <a href="https://github.com/Luiz6699/mentalcare-app" target="_blank" style="display: inline-flex; align-items: center; background-color: #24292e; color: #ffffff; padding: 10px 20px; border-radius: 6px; font-weight: 600; text-decoration: none; border: 1px solid rgba(255,255,255,0.1); font-size: 14px; transition: 0.3s;" onmouseover="this.style.backgroundColor='#444d56'" onmouseout="this.style.backgroundColor='#24292e'">
+        <span style="margin-right: 8px;">🔗</span> Review Source Code &amp; Git Progress
+      </a>
+    </div>
+    
+    <div style="flex: 1.3; display: flex; justify-content: center; align-items: center; background-color: #070a13; border-radius: 6px; padding: 10px;">
+      <video autoplay loop muted playsinline style="width: 100%; height: auto; display: block; object-fit: contain; border-radius: 4px;">
+        <source src="mental-health.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    </div>
+    
+  </div>
+</div>
+
+    <!-- KARTU NETWORK SIMULATION -->
+    <div class="case-item">
+      <span class="sev sev-network mono">Network</span>
+      <div>
+        <h3>Secure Network Simulation &amp; Audit</h3>
+        <p>Designed computer network topology simulations using Cisco Packet Tracer and evaluated data packet traffic through Wireshark.</p>
+      </div>
+      <span class="case-arrow">&rarr;</span>
+    </div>
+
+  </div> <!-- /TUTUP CASE-LIST -->
+
+
+  <!-- 2. KOTAK DETAIL SHOWCASE (TARUH DI LUAR CASE-LIST AGAR TIDAK BERANTAKAH) -->
+  <div id="budgetbits-detail-section" style="display: none; max-height: 0; overflow: hidden; opacity: 0; transition: all 0.5s ease-in-out; width: 100%; margin-top: 30px;">
+    <div style="display: flex; align-items: center; justify-content: space-between; gap: 40px; background-color: #0b111e; padding: 30px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.05); text-align: left;">
+      
+      <!-- SISI KIRI: Deskripsi Teknis -->
+      <div style="flex: 1; max-width: 45%;">
+        <span style="text-transform: uppercase; letter-spacing: 2px; color: #38bdf8; font-size: 11px; font-weight: 700;">Technical Breakdown</span>
+        <h3 style="font-size: 26px; font-weight: 800; margin: 5px 0 15px 0; color: #ffffff;">BudgetBits Architecture</h3>
+        <p style="color: #94a3b8; line-height: 1.6; font-size: 14px; margin-bottom: 20px;">
+          Designed and engineered the relational database schema utilizing SQLite local storage (`DatabaseHelper`) to manage persistent user transactional data[cite: 3]. Implemented thread-safe, atomic backend logic using explicit SQLite transactions to automatically synchronize real-time user balances across insert, update, and delete mutations without memory overhead[cite: 3].
+        </p>
+        <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+          <span style="background: rgba(56, 189, 248, 0.1); color: #38bdf8; padding: 4px 10px; border-radius: 20px; font-size: 12px; font-weight: 600;">Android Studio</span>
+          <span style="background: rgba(56, 189, 248, 0.1); color: #38bdf8; padding: 4px 10px; border-radius: 20px; font-size: 12px; font-weight: 600;">Kotlin / Java</span>
+          <span style="background: rgba(56, 189, 248, 0.1); color: #38bdf8; padding: 4px 10px; border-radius: 20px; font-size: 12px; font-weight: 600;">SQLite Architecture</span>
         </div>
       </div>
-    </section>
 
-    <section id="experience">
+      <!-- SISI KANAN: Tempat Gambar Showcase (Sudah pakai file showcase.jpeg kamu) -->
+      <div style="flex: 1.3; display: flex; justify-content: center; align-items: center; background-color: #070a13; border-radius: 6px; padding: 10px;">
+        <img src="show case.jpeg" alt="BudgetBits UI/UX Showcase" style="width: 100%; height: auto; display: block; object-fit: contain; border-radius: 4px;">
+      </div>
+
+    </div>
+  </div>
+
+</section> <!-- /TUTUP SECTION PROJECTS -->
+<section id="experience"><section id="experience">
       <div class="eyebrow">04 · Experience &amp; Leadership</div>
       <h2 class="sec-title">Activity History</h2>
+
+      <!-- FOTO YANG SUDAH DITENGAHKAN -->
+      <div class="org-gallery">
+        <div class="org-photo-wrapper">
+          <img src="foto organisasi.jpg" alt="KSM Cyber Security Team UPNVJ" class="org-photo">
+        </div>
+        <div class="org-caption">Louis and the KSM Cyber Security team at UPNVJ campus event.</div>
+      </div>
+
+      <!-- TIMELINE UTAMA (Pastikan langsung masuk ke div timeline ini) -->
       <div class="timeline">
-        <div class="tl-item"><div class="tl-date mono">2026 — Present</div><h3>Head of Multimedia Division, KSM Cyber Security UPNVJ</h3><p>Leading the team in digital content production, designing organizational branding, and collaborating across divisions to enhance community publication.</p></div>
-        <div class="tl-item"><div class="tl-date mono">2025</div><h3>Project Officer Open Recruitment, KSM Cyber Security UPNVJ</h3><p>Led the recruitment cycle for new members from timeline management and logistics distribution to organizing technical trial classes for prospective applicants.</p></div>
-        <div class="tl-item"><div class="tl-date mono">2025</div><h3>HRD Staff, KSM Cyber Security UPNVJ</h3><p>Assisted in designing internal training programs to develop technical capabilities and soft skills for members.</p></div>
-        <div class="tl-item"><div class="tl-date mono">2024 — 2025</div><h3>Junior Member of Videography Division, UKM UFO UPNVJ</h3><p>Contributed to the creative production team for activity documentation and university-level media coverage.</p></div>
+        <div class="tl-item">
+          <div class="tl-date mono">2026 — Present</div>
+          <h3>Head of Multimedia Division, KSM Cyber Security UPNVJ</h3>
+          <p>Leading the team in digital content production, designing organizational branding, and collaborating across divisions to enhance community publication.</p>
+        </div>
+        <div class="tl-item">
+          <div class="tl-date mono">2025</div>
+          <h3>Project Officer Open Recruitment, KSM Cyber Security UPNVJ</h3>
+          <p>Led the recruitment cycle for new members from timeline management and logistics distribution to organizing technical trial classes for prospective applicants.</p>
+        </div>
+        <div class="tl-item">
+          <div class="tl-date mono">2025</div>
+          <h3>HRD Staff, KSM Cyber Security UPNVJ</h3>
+          <p>Assisted in designing internal training programs to develop technical capabilities and soft skills for members.</p>
+        </div>
+        <div class="tl-item">
+          <div class="tl-date mono">2024 — 2025</div>
+          <h3>Junior Member of Videography Division, UKM UFO UPNVJ</h3>
+          <p>Contributed to the creative production team for activity documentation and university-level media coverage.</p>
+        </div>
       </div>
     </section>
 
@@ -449,11 +645,24 @@
         <h2>Let's Collaborate</h2>
         <p>Open for internship positions in software engineering, full-stack development, or digital systems project deployment.</p>
         <div class="contact-links">
-          <a href="mailto:2410511003@mahasiswa.upnvj.ac.id">2410511003@mahasiswa.upnvj.ac.id</a>
-          <a href="https://linkedin.com/in/usernamekamu" target="_blank">linkedin.com/in/usernamekamu</a>
-          <a href="https://github.com/usernamekamu" target="_blank">github.com/usernamekamu</a>
+          <!-- GMAIL WEBSITE -->
+          <a href="https://mail.google.com/mail/?view=cm&fs=1&to=2410511003@mahasiswa.upnvj.ac.id" target="_blank">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+            2410511003@mahasiswa.upnvj.ac.id
+          </a>
+          
+          <!-- LINKEDIN -->
+          <a href="https://www.linkedin.com/in/louis-fernando-7719b3320" target="_blank">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+            linkedin.com/in/louis-fernando
+          </a>
+          
+          <!-- GITHUB -->
+          <a href="https://github.com/luiz6699" target="_blank">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+            github.com/luiz6699
+          </a>
         </div>
-      </div>
     </section>
   </div>
 
@@ -558,6 +767,55 @@
       card.style.transform = 'rotateY(0) rotateX(0) translateY(0)';
     });
   });
+</script>
+<script>
+function toggleProjectDetail() {
+  const detailSection = document.getElementById('budgetbits-detail-section');
+  
+  if (detailSection.style.display === 'none' || detailSection.style.display === '') {
+    detailSection.style.display = 'block';
+    setTimeout(() => {
+      detailSection.style.maxHeight = '1200px'; 
+      detailSection.style.opacity = '1';
+    }, 10);
+    
+    setTimeout(() => {
+      detailSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 300);
+    
+  } else {
+    detailSection.style.maxHeight = '0';
+    detailSection.style.opacity = '0';
+    setTimeout(() => {
+      detailSection.style.display = 'none';
+    }, 500);
+  }
+}
+
+function toggleMentalHealthDetail() {
+  const detailSection = document.getElementById('mentalhealth-detail-section');
+  
+  if (detailSection.style.display === 'none' || detailSection.style.display === '') {
+    detailSection.style.display = 'block';
+    // Memicu efek transisi CSS secara halus
+    setTimeout(() => {
+      detailSection.style.maxHeight = '1200px'; 
+      detailSection.style.opacity = '1';
+    }, 10);
+    
+    // Otomatis scroll layar ke bagian detail video agar fokus pembaca pas
+    setTimeout(() => {
+      detailSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 300);
+    
+  } else {
+    detailSection.style.maxHeight = '0';
+    detailSection.style.opacity = '0';
+    setTimeout(() => {
+      detailSection.style.display = 'none';
+    }, 500);
+  }
+}
 </script>
 </body>
 </html>
